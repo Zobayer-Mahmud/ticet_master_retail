@@ -256,6 +256,9 @@ class PrePurchaseActivity : AppCompatActivity() {
 //        }
 
         launchButton.setOnClickListener {
+            //API key:  C1pkjWYZmFChCKF2NO0K0mOsD11pZHpA
+            //User_name:  Wyzrfriends25
+            //venueId: KovZ917AtFi
             try {
                 // Log the start of the button click
                 Log.d("PrePurchase", "Launch button clicked")
