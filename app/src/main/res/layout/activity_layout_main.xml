@@ -37,7 +37,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/api_key_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="C1pkjWYZmFChCKF2NO0K0mOsD11pZHpA"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,6 +56,23 @@
             app:layout_constraintTop_toBottomOf="@id/api_key_input" />
 
 
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/client_name_input"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/client_name_section"-->
+<!--            android:hint="@string/enter_client_name">-->
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/client_name_edit_text"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/client_name_input"
             android:layout_width="match_parent"
@@ -67,9 +85,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/client_name_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
+                android:layout_height="wrap_content"
+                android:text="Wyzrfriends25" />
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/artist_venue_id_section"
@@ -97,7 +116,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/artist_venue_id_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="KovZ917AtFi"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -28,71 +28,160 @@ import com.ticketmaster.purchase.listener.TMPurchaseUserAnalyticsListener
 import com.ticketmaster.purchase.listener.TMPurchaseWebAnalyticsListener
 import kotlinx.coroutines.launch
 import java.net.URL
+import android.util.Log
+import com.ticketmaster.discoveryapi.enums.TMEnvironment
 
 class PurchaseActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_layout_purchase)
 
         if (savedInstanceState == null) {
+            Log.d("PurchaseActivity", "onCreate: Activity created, savedInstanceState is null")
 
-            val tmPurchase: TMPurchase =
-                intent.extras?.getParcelable(TMPurchase::class.java.name)
-                    ?: throw TmInvalidConfigurationException()
 
-            val tmPurchaseWebsiteConfiguration: TMPurchaseWebsiteConfiguration =
-                intent.extras?.getParcelable(TMPurchaseWebsiteConfiguration::class.java.name)
-                    ?: throw TmInvalidConfigurationException()
+            val tmPurchase = TMPurchase(
+              "C1pkjWYZmFChCKF2NO0K0mOsD11pZHpA",
+                TMEnvironment.Production
+            )
+//            val tmPurchase: TMPurchase =
+//                intent.extras?.getParcelable(TMPurchase::class.java.name)
+//                    ?: throw TmInvalidConfigurationException().also {
+//                        Log.e("PurchaseActivity", "Error: TMPurchase configuration missing")
+//                    }
+ val tmPurchaseWebsiteConfiguration:TMPurchaseWebsiteConfiguration = TMPurchaseWebsiteConfiguration(
+     "Z7r9jZ1A7uxFV",
+     TMMarketDomain.US,              )
+
+//            val tmPurchaseWebsiteConfiguration: TMPurchaseWebsiteConfiguration =
+//                intent.extras?.getParcelable(TMPurchaseWebsiteConfiguration::class.java.name)
+//                    ?: TMPurchaseWebsiteConfiguration(
+//                      "KovZ917AtFi",
+//                        TMMarketDomain.US,              ).also {
+//                        Log.w("PurchaseActivity", "Warning: TMPurchaseWebsiteConfiguration missing, using default values")
+//                    }
+
+//            val tmPurchaseWebsiteConfiguration: TMPurchaseWebsiteConfiguration =
+//                intent.extras?.getParcelable(TMPurchaseWebsiteConfiguration::class.java.name)
+//                    ?: throw TmInvalidConfigurationException().also {
+//                        Log.e("PurchaseActivity", "Error: TMPurchaseWebsiteConfiguration missing")
+//                    }
+
+            Log.d("PurchaseActivity", "onCreate: TMPurchase and TMPurchaseWebsiteConfiguration received")
 
             lifecycleScope.launch {
-                /**
-                 * Just like in PrePurchase, we make use of a fragment factory to enable you to implement
-                 * a series of listener that fits your business needs and in return you get a Fragment
-                 * to display. TMPurchaseFragmentFactory is the Purchase flow's fragment factory
-                 */
+                Log.d("PurchaseActivity", "onCreate: Starting fragment transaction in coroutine")
+
                 val factory = TMPurchaseFragmentFactory(
-                    tmPurchaseNavigationListener = PurchaseNavigationListener { finish() },
-                    tmPurchaseUserAnalyticsListener = UserAnalyticsListener { finish() },
+                    tmPurchaseNavigationListener = PurchaseNavigationListener {
+                        Log.d("PurchaseActivity", "NavigationListener: finishing activity")
+                        finish()
+                    },
+                    tmPurchaseUserAnalyticsListener = UserAnalyticsListener {
+                        Log.d("PurchaseActivity", "UserAnalyticsListener: finishing activity")
+                        finish()
+                    },
                     tmPurchaseWebAnalyticsListener = WebAnalyticsListener(),
                     tmPurchaseShareListener = ShareListener(),
                     tmPurchaseFavoritesListener = PurchaseFavoriteListener()
                 ).apply {
                     supportFragmentManager.fragmentFactory = this
+                    Log.d("PurchaseActivity", "onCreate: Fragment factory set")
                 }
 
                 val tmAuthenticationParams = setupTMAuthenticationParams(
                     tmPurchase, tmPurchaseWebsiteConfiguration
                 )
 
+                Log.d("PurchaseActivity", "onCreate: Authentication parameters set up")
+
                 val bundle = tmPurchase.getPurchaseBundle(
                     tmPurchaseWebsiteConfiguration,
                     tmAuthenticationParams
                 )
 
+                Log.d("PurchaseActivity", "onCreate: Purchase bundle created")
+
                 val fragment = factory.instantiatePurchase(classLoader).apply {
                     arguments = bundle
                 }
 
+                Log.d("PurchaseActivity", "onCreate: Fragment instantiated, starting transaction")
+
                 supportFragmentManager.beginTransaction()
                     .add(android.R.id.content, fragment)
                     .commit()
+
+                Log.d("PurchaseActivity", "onCreate: Fragment transaction committed")
             }
         }
     }
+
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_layout_purchase)
+//
+//        if (savedInstanceState == null) {
+//
+//            val tmPurchase: TMPurchase =
+//                intent.extras?.getParcelable(TMPurchase::class.java.name)
+//                    ?: throw TmInvalidConfigurationException()
+//
+//            val tmPurchaseWebsiteConfiguration: TMPurchaseWebsiteConfiguration =
+//                intent.extras?.getParcelable(TMPurchaseWebsiteConfiguration::class.java.name)
+//                    ?: throw TmInvalidConfigurationException()
+//
+//            lifecycleScope.launch {
+//                /**
+//                 * Just like in PrePurchase, we make use of a fragment factory to enable you to implement
+//                 * a series of listener that fits your business needs and in return you get a Fragment
+//                 * to display. TMPurchaseFragmentFactory is the Purchase flow's fragment factory
+//                 */
+//                val factory = TMPurchaseFragmentFactory(
+//                    tmPurchaseNavigationListener = PurchaseNavigationListener { finish() },
+//                    tmPurchaseUserAnalyticsListener = UserAnalyticsListener { finish() },
+//                    tmPurchaseWebAnalyticsListener = WebAnalyticsListener(),
+//                    tmPurchaseShareListener = ShareListener(),
+//                    tmPurchaseFavoritesListener = PurchaseFavoriteListener()
+//                ).apply {
+//                    supportFragmentManager.fragmentFactory = this
+//                }
+//
+//                val tmAuthenticationParams = setupTMAuthenticationParams(
+//                    tmPurchase, tmPurchaseWebsiteConfiguration
+//                )
+//
+//                val bundle = tmPurchase.getPurchaseBundle(
+//                    tmPurchaseWebsiteConfiguration,
+//                    tmAuthenticationParams
+//                )
+//
+//                val fragment = factory.instantiatePurchase(classLoader).apply {
+//                    arguments = bundle
+//                }
+//
+//                supportFragmentManager.beginTransaction()
+//                    .add(android.R.id.content, fragment)
+//                    .commit()
+//            }
+//        }
+//    }
 
     private fun setupTMAuthenticationParams(
         tmPurchase: TMPurchase,
         tmPurchaseWebsiteConfiguration: TMPurchaseWebsiteConfiguration
     ): TMAuthenticationParams {
-        val region = when (tmPurchaseWebsiteConfiguration.hostType) {
-            TMMarketDomain.UK, TMMarketDomain.IE -> TMXDeploymentRegion.UK
-            else -> TMXDeploymentRegion.US
-        }
+//        val region = when (tmPurchaseWebsiteConfiguration.hostType) {
+//            TMMarketDomain.UK, TMMarketDomain.IE -> TMXDeploymentRegion.UK
+//            else -> TMXDeploymentRegion.US
+//        }
         return TMAuthenticationParams(
-            apiKey = tmPurchase.apiKey,
-            clientName = "Ticketmaster",
-            region = region,
+            apiKey ="C1pkjWYZmFChCKF2NO0K0mOsD11pZHpA",
+            clientName = "Wyzrfriends25",
+            region = TMXDeploymentRegion.US,
             environment = TMXDeploymentEnvironment.Production,
             quickLogin = false,
             autoQuickLogin = false
