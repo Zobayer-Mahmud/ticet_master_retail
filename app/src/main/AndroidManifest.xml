@@ -13,11 +13,10 @@
         android:theme="@style/Theme.TicketMasterRetailAndTicketsDemo"
         tools:targetApi="31">
         <activity
-            android:name=".PrePurchaseActivity"
+            android:name=".DiscoverActivity"
             android:exported="false" />
-
         <activity
-            android:name=".PurchaseActivity"
+            android:name=".HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.TicketMasterRetailAndTicketsDemo"
             tools:ignore="DuplicateActivity">
@@ -27,23 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-<!--        <activity-->
-<!--            android:name=".PurchaseActivity"-->
-<!--            android:exported="false" />-->
-
-<!--        <activity-->
-<!--            android:name=".PrePurchaseActivity"-->
-<!--            android:exported="true"-->
-<!--            android:theme="@style/Theme.TicketMasterRetailAndTicketsDemo"-->
-<!--            tools:ignore="DuplicateActivity">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
+        <activity
+            android:name=".PrePurchaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PurchaseActivity"
+            android:exported="false" />
 
     </application>
 

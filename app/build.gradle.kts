@@ -71,6 +71,10 @@ dependencies {
 
     //This version doesn't sync  com.github.romandanylyk:pageindicatorview:v.1.0.3
 //    implementation(libs.tickets)
+//    implementation("com.ticketmaster.tickets:tickets:3.10.1") {
+//        exclude( "com.github.romandanylyk","pageindicatorview")
+//    }
+
 //// Accounts SDK
     implementation(libs.authentication)
 //// Retail SDK
@@ -78,6 +82,25 @@ dependencies {
     implementation(libs.prepurchase)
     implementation(libs.discoveryapi)
     implementation(libs.foundation)
+
+
+
+    //newly added dependency
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+
+//    implementation ("com.ticketmaster.tickets:tickets:3.10.1"){
+//        exclude ( "com.romandanylyk", "pageindicatorview")
+//    }
+
+
+
+
 
 
 

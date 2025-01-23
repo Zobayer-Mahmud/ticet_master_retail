@@ -27,12 +27,11 @@ import com.ticketmaster.purchase.listener.TMPurchaseSharingListener
 import com.ticketmaster.purchase.listener.TMPurchaseUserAnalyticsListener
 import com.ticketmaster.purchase.listener.TMPurchaseWebAnalyticsListener
 import kotlinx.coroutines.launch
-import java.net.URL
 import android.util.Log
 import com.ticketmaster.discoveryapi.enums.TMEnvironment
+import java.net.URL
 
 class PurchaseActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +45,20 @@ class PurchaseActivity : AppCompatActivity() {
               "C1pkjWYZmFChCKF2NO0K0mOsD11pZHpA",
                 TMEnvironment.Production
             )
+
 //            val tmPurchase: TMPurchase =
 //                intent.extras?.getParcelable(TMPurchase::class.java.name)
 //                    ?: throw TmInvalidConfigurationException().also {
 //                        Log.e("PurchaseActivity", "Error: TMPurchase configuration missing")
 //                    }
- val tmPurchaseWebsiteConfiguration:TMPurchaseWebsiteConfiguration = TMPurchaseWebsiteConfiguration(
-     "Z7r9jZ1A7uxFV",
-     TMMarketDomain.US,              )
+    val tmPurchaseWebsiteConfiguration = TMPurchaseWebsiteConfiguration(
+        "Z7r9jZ1A7uxFV",
+        TMMarketDomain.US,
+    )
+//            val tmDiscoveryAPI = TMDiscoveryApi.Builder()
+//                .apikey("<API KEY HERE>")
+//                .market("<TMMarketDomain..>")
+//                .build()
 
 //            val tmPurchaseWebsiteConfiguration: TMPurchaseWebsiteConfiguration =
 //                intent.extras?.getParcelable(TMPurchaseWebsiteConfiguration::class.java.name)

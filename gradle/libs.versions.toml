@@ -1,6 +1,7 @@
 [versions]
 agp = "8.7.3"
 authentication = "3.10.0"
+converterGson = "2.9.0"
 discoveryapi = "3.3.0"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
@@ -12,8 +13,9 @@ activityCompose = "1.10.0"
 composeBom = "2025.01.00"
 prepurchase = "3.2.6"
 purchase = "3.2.6"
-secureEntry = "1.3.0"
-tickets = "3.10.0"
+retrofit = "2.9.0"
+secureEntry = "1.3.1"
+tickets = "3.10.1"
 constraintlayout = "2.2.0"
 material = "1.12.0"
 appcompat = "1.7.0"
@@ -22,6 +24,7 @@ activity = "1.10.0"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 authentication = { module = "com.ticketmaster.accounts:authentication", version.ref = "authentication" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 discoveryapi = { module = "com.ticketmaster.retail:discoveryapi", version.ref = "discoveryapi" }
 foundation = { module = "com.ticketmaster.retail:foundation", version.ref = "discoveryapi" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -39,6 +42,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 prepurchase = { module = "com.ticketmaster.retail:prepurchase", version.ref = "prepurchase" }
 purchase = { module = "com.ticketmaster.retail:purchase", version.ref = "purchase" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 secure-entry = { module = "com.ticketmaster.tickets:secure-entry", version.ref = "secureEntry" }
 tickets = { module = "com.ticketmaster.tickets:tickets", version.ref = "tickets" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
