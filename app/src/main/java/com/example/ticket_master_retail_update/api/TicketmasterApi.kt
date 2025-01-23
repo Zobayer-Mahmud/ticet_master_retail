@@ -10,7 +10,7 @@ interface TicketmasterApi {
     fun getEvents(
         @Query("apikey") apiKey: String,
 //        @Query("keyword") keyword: String?,
-        @Query("size") size: Int = 15,
+        @Query("size") size: Int =100,
         @Query("page") page: Int = 0
     ): Call<EventResponse>
 }
